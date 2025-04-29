@@ -746,7 +746,7 @@ class FDEFractalNoPropNetwork(nn.Module):
             for t in range(self.T):
                 z = self.forward_block(x_embed, z, t)
                 pred_embed = z
-                loss = F.mse_loss(pred_embed, y_embed)
+                loss = F.smooth_l1_loss(pred_embed, y_embed)
                 losses.append(loss)
             final_output = self.classifier(z)
             total_loss = torch.stack(losses).mean()
