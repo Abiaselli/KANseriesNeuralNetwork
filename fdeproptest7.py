@@ -1869,7 +1869,7 @@ def main():
     # Initialize the integrated model with desired module toggles.
     #model = Transformer_Model(vocab_size, embed_size, num_layers, num_heads, seq_length=args.max_seq_length, device=device, tokenizer=base_tokenizer).to(device)
     model = FDEFractalNoPropNetwork(seq_len, seq_len, vocab_size, T=1, device=device).to(device)
-    optimizer = optim.AdamW(model.parameters(), lr=0.0125)
+    optimizer = optim.SGD(model.parameters(), lr=0.0125)
     criterion = nn.CrossEntropyLoss(ignore_index=tokenizer.pad_token_id)
     model = model.to(device)
     model = model.double()
